@@ -1,9 +1,9 @@
-const quoteContainer = document.getElementById("quote-container");
-const quoteText = document.getElementById("quote");
-const authorText = document.getElementById("author");
+const quoteContainer = document.getElementById("divContainer");
+const jokeText = document.getElementById("joke");
+const replyText = document.getElementById("reply");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
-const loader = document.getElementById("loader");
+const loader = document.getElementById("divLoader");
 
 function showLoadingSpinner() {
   loader.hidden = false;
@@ -20,29 +20,19 @@ function removeLoadingSpinner() {
 // Get quote from API
 async function getQuote() {
   showLoadingSpinner();
-  const apiUrl =
-    "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
-
+  const apiUrl = "https://dad-jokes.p.rapidapi.com/random/joke";
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "50da085a3amsh259f2c9986aaf81p1c61b4jsn164acff9d8be",
+      "X-RapidAPI-Host": "dad-jokes.p.rapidapi.com",
+    },
+  };
   try {
-    //const response = await fetch(proxyUrl + apiUrl);
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, options);
     const data = await response.json();
-
-    //if author is blank add unknown
-    if (data.quoteAuthor === "") {
-      authorText.innerText = "Unknown";
-    } else {
-      getQuote();
-      authorText.innerText = data.quoteAuthor;
-    }
-
-    //reduce font size for long quotes
-    if (data.quoteText.length > 120) {
-      quoteText.classList.add("long-quote");
-    } else {
-      quoteText.classList.remove("long-quote");
-    }
-    quoteText.innerText = data.quoteText;
+    jokeText.innerText = data.body[0].setup;
+    replyText.innerText = data.body[0].punchline;
     removeLoadingSpinner();
   } catch (error) {
     //getQuote();
@@ -51,8 +41,8 @@ async function getQuote() {
 
 //Tweet quote
 function tweetQuote() {
-  const quote = quoteText.innerText;
-  const author = authorText.innerText;
+  const quote = jokeText.innerText;
+  const author = replyText.innerText;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
   window.open(twitterUrl, "_blank");
 }

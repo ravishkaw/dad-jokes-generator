@@ -23,7 +23,7 @@ body {
   justify-content: center;
 }
 
-.quote-container-c{
+.classJokeContainer{
   width: auto;
   max-width: 900px;
   padding: 20px 30px;
@@ -32,7 +32,7 @@ body {
   box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-.quote-text{
+.joke-text{
   font-size: 2.5rem;
 }
 
@@ -44,7 +44,7 @@ body {
   font-size: 4rem;
 }
 
-.quote-author{
+.joke-reply{
   margin-top: 15px;
   font-size: 2rem;
   font-weight: 400;
@@ -89,7 +89,7 @@ button:active{
 }
 
 /* loader */
-.loader-c {
+.divClassLoader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #333; /* Blue */
   border-radius: 50%;
@@ -104,11 +104,11 @@ button:active{
 }
 
 @media screen and (max-witdth: 1000px){
-  .quote-container{
+  .classJokeContainer{
     margin: auto 10px;
   }
 
-  .quote-text{
+  .joke-text{
     font-size: 2.5rem;
   }
 }
